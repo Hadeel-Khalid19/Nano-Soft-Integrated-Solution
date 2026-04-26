@@ -76,8 +76,8 @@ const LoginPage = ({ onNavigate }) => {
           {loginMethod === 'phone' ? (
             <div className="phone-input-container">
               <div className="country-code-prefix">
-                <span>🇾🇪</span>
-                <span>+967</span>
+                <img src="https://flagcdn.com/w20/ye.png" alt="Yemen" style={{ width: '24px', height: 'auto', borderRadius: '2px' }} />
+                <span style={{ direction: 'ltr' }}>+967</span>
               </div>
               <input 
                 type="tel" 

@@ -119,7 +119,7 @@ class _RegisterViewState extends State<RegisterView> {
           child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('🇾🇪', style: TextStyle(fontSize: 18)),
+              Image.network('https://flagcdn.com/w40/ye.png', width: 24, errorBuilder: (context, error, stackTrace) => const Text('YE', style: TextStyle(fontWeight: FontWeight.bold))),
               SizedBox(width: 4),
               Text('+967', style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A), fontSize: 15)),
             ],
