@@ -3,7 +3,8 @@ import authService from '../services/authService';
 import '../styles/Login.css';
 
 const LoginPage = ({ onNavigate }) => {
-  const [mobile, setMobile] = useState('');
+  const [loginMethod, setLoginMethod] = useState('phone'); // 'phone' or 'email'
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,9 +15,11 @@ const LoginPage = ({ onNavigate }) => {
     setLoading(true);
 
     try {
-      const data = await authService.login(mobile, password);
+      // إذا كان مختار هاتف، ممكن نضيف مفتاح الدولة إذا كان الـ API يطلبه، لكن حالياً نرسله كما هو أو حسب متطلباتك
+      // let finalIdentifier = loginMethod === 'phone' ? `+967${identifier}` : identifier;
+      const data = await authService.login(identifier, password);
       alert('تم تسجيل الدخول بنجاح!');
-      onNavigate('profile'); // التوجه للبروفايل بعد الدخول
+      onNavigate('profile');
     } catch (err) {
       let errorMessage = 'فشل تسجيل الدخول، تأكد من البيانات';
       const responseData = err?.response?.data;
@@ -43,24 +46,58 @@ const LoginPage = ({ onNavigate }) => {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>مرحباً بك</h1>
-          <p>سجل دخولك لمتابعة تدريب نانو سوفت</p>
+          <h1>أهلاً وسهلاً بك!</h1>
+          <p>سجل دخولك للاستمتاع بتجربة سلسة وآمنة</p>
         </div>
 
         {error && <div className="error-message">{error}</div>}
 
+        <div className="login-tabs">
+          <button 
+            type="button"
+            className={`tab-btn ${loginMethod === 'phone' ? 'active' : ''}`}
+            onClick={() => setLoginMethod('phone')}
+          >
+            <span>📱</span> رقم الجوال
+          </button>
+          <button 
+            type="button"
+            className={`tab-btn ${loginMethod === 'email' ? 'active' : ''}`}
+            onClick={() => setLoginMethod('email')}
+          >
+            <span>✉️</span> البريد الإلكتروني
+          </button>
+        </div>
+
         <form onSubmit={handleLogin} className="login-form">
         <div className="form-group">
-          <label>رقم الهاتف</label>
-          <div className="input-wrapper">
-            <input 
-              type="tel" 
-              placeholder="أدخل رقم هاتفك (مثال: 777123456)" 
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-              required
-            />
-          </div>
+          <label>{loginMethod === 'phone' ? 'رقم الجوال' : 'البريد الإلكتروني'}</label>
+          
+          {loginMethod === 'phone' ? (
+            <div className="phone-input-container">
+              <div className="country-code-prefix">
+                <span>🇾🇪</span>
+                <span>+967</span>
+              </div>
+              <input 
+                type="tel" 
+                placeholder="أدخل رقم الجوال" 
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                required
+              />
+            </div>
+          ) : (
+            <div className="input-wrapper">
+              <input 
+                type="email" 
+                placeholder="أدخل بريدك الإلكتروني" 
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                required
+              />
+            </div>
+          )}
         </div>
 
           <div className="form-group">

@@ -14,16 +14,18 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final _identifierController = TextEditingController(); // تم تغيير الاسم ليكون عاماً (هاتف أو إيميل)
+  final _identifierController = TextEditingController();
   final _passwordController = TextEditingController();
   final _authService = AuthService();
   bool _isLoading = false;
+  bool _isPhone = true; // Toggle between Phone and Email
 
   Future<void> _handleLogin() async {
     if (_identifierController.text.isEmpty || _passwordController.text.isEmpty) return;
     
     setState(() => _isLoading = true);
     try {
+      // If needed, format phone number here (e.g. '+967' + _identifierController.text)
       await _authService.login(_identifierController.text, _passwordController.text);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
@@ -63,12 +65,69 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('مرحباً بك', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A))),
+                    const Text('أهلاً وسهلاً بك!', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A))),
                     const SizedBox(height: 8),
-                    const Text('سجل دخولك لمتابعة تدريب نانو سوفت', textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF64748B), fontSize: 14)),
-                    const SizedBox(height: 40),
+                    const Text('سجل دخولك للاستمتاع بتجربة سلسة وآمنة', textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF64748B), fontSize: 14)),
+                    const SizedBox(height: 30),
 
-                    _buildRoyalField(_identifierController, 'البريد الإلكتروني أو الهاتف', Icons.person_outline),
+                    // Tabs
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF1F5F9),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.all(4),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => setState(() { _isPhone = true; _identifierController.clear(); }),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: _isPhone ? Colors.white : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: _isPhone ? [const BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))] : [],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('📱 ', style: TextStyle(fontSize: 16)),
+                                    Text('رقم الجوال', style: TextStyle(fontWeight: FontWeight.w600, color: _isPhone ? const Color(0xFF1E3A8A) : const Color(0xFF64748B))),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => setState(() { _isPhone = false; _identifierController.clear(); }),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: !_isPhone ? Colors.white : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: !_isPhone ? [const BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))] : [],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('✉️ ', style: TextStyle(fontSize: 16)),
+                                    Text('البريد الإلكتروني', style: TextStyle(fontWeight: FontWeight.w600, color: !_isPhone ? const Color(0xFF1E3A8A) : const Color(0xFF64748B))),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+
+                    _isPhone 
+                      ? _buildPhoneField() 
+                      : _buildRoyalField(_identifierController, 'أدخل بريدك الإلكتروني', Icons.email_outlined),
+                    
                     const SizedBox(height: 20),
                     _buildRoyalField(_passwordController, 'كلمة المرور', Icons.lock_outline, isPass: true),
                     
@@ -111,6 +170,39 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildGlowSphere(Color color, double size) {
     return Container(width: size, height: size, decoration: BoxDecoration(shape: BoxShape.circle, color: color), child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60), child: Container(color: Colors.transparent)));
+  }
+
+  Widget _buildPhoneField() {
+    return TextField(
+      controller: _identifierController, 
+      keyboardType: TextInputType.phone,
+      style: const TextStyle(fontSize: 15, color: Color(0xFF1E3A8A)),
+      decoration: InputDecoration(
+        labelText: 'رقم الجوال', 
+        labelStyle: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
+        prefixIcon: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(left: 12),
+          decoration: const BoxDecoration(
+            border: Border(left: BorderSide(color: Color(0xFFE2E8F0))),
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('🇾🇪', style: TextStyle(fontSize: 18)),
+              SizedBox(width: 4),
+              Text('+967', style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A), fontSize: 15)),
+            ],
+          ),
+        ),
+        filled: true, 
+        fillColor: Colors.white, 
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFD4AF37), width: 2)),
+      ),
+    );
   }
 
   Widget _buildRoyalField(TextEditingController controller, String label, IconData icon, {bool isPass = false}) {
