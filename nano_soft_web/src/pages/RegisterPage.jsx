@@ -90,9 +90,13 @@ const RegisterPage = ({ onNavigate }) => {
           </div>
 
           <div className="form-group">
-            <label>رقم الهاتف</label>
-            <div className="input-wrapper">
-              <input name="mobile" type="tel" placeholder="000000000" onChange={handleChange} required />
+            <label>رقم الجوال</label>
+            <div className="phone-input-container">
+              <div className="country-code-prefix">
+                <span>🇾🇪</span>
+                <span>+967</span>
+              </div>
+              <input name="mobile" type="tel" placeholder="أدخل رقم الجوال" onChange={handleChange} required />
             </div>
           </div>
 

@@ -13,6 +13,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _mobileController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _authService = AuthService();
@@ -31,6 +32,7 @@ class _RegisterViewState extends State<RegisterView> {
       await _authService.register({
         'name': _nameController.text,
         'email': _emailController.text,
+        'mobile': _mobileController.text,
         'password': _passwordController.text,
         'password_confirmation': _confirmPasswordController.text,
       });
@@ -79,6 +81,8 @@ class _RegisterViewState extends State<RegisterView> {
                     const SizedBox(height: 16),
                     _buildRoyalField(_emailController, 'البريد الإلكتروني', Icons.email_outlined),
                     const SizedBox(height: 16),
+                    _buildPhoneField(),
+                    const SizedBox(height: 16),
                     _buildRoyalField(_passwordController, 'كلمة المرور', Icons.lock_outline, isPass: true),
                     const SizedBox(height: 16),
                     _buildRoyalField(_confirmPasswordController, 'تأكيد كلمة المرور', Icons.lock_reset, isPass: true),
@@ -96,6 +100,39 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildGlowSphere(Color color, double size) {
     return Container(width: size, height: size, decoration: BoxDecoration(shape: BoxShape.circle, color: color), child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60), child: Container(color: Colors.transparent)));
+  }
+
+  Widget _buildPhoneField() {
+    return TextField(
+      controller: _mobileController, 
+      keyboardType: TextInputType.phone,
+      style: const TextStyle(fontSize: 15, color: Color(0xFF1E3A8A)),
+      decoration: InputDecoration(
+        labelText: 'رقم الجوال', 
+        labelStyle: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
+        prefixIcon: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.only(left: 12),
+          decoration: const BoxDecoration(
+            border: Border(left: BorderSide(color: Color(0xFFE2E8F0))),
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('🇾🇪', style: TextStyle(fontSize: 18)),
+              SizedBox(width: 4),
+              Text('+967', style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A), fontSize: 15)),
+            ],
+          ),
+        ),
+        filled: true, 
+        fillColor: Colors.white, 
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFD4AF37), width: 2)),
+      ),
+    );
   }
 
   Widget _buildRoyalField(TextEditingController controller, String label, IconData icon, {bool isPass = false}) {
