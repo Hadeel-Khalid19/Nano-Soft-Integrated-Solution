@@ -19,7 +19,7 @@ const LoginPage = ({ onNavigate }) => {
       // let finalIdentifier = loginMethod === 'phone' ? `+967${identifier}` : identifier;
       const data = await authService.login(identifier, password);
       alert('تم تسجيل الدخول بنجاح!');
-      onNavigate('profile');
+      onNavigate('home');
     } catch (err) {
       let errorMessage = 'فشل تسجيل الدخول، تأكد من البيانات';
       const responseData = err?.response?.data;
