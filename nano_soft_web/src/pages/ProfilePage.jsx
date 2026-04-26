@@ -39,7 +39,11 @@ const ProfilePage = ({ onNavigate }) => {
     if (!editState.value) return;
     setEditState({ ...editState, loading: true, error: '' });
     try {
-      const payload = editState.type === 'email' ? { email: editState.value } : { mobile: editState.value };
+      let finalValue = editState.value;
+      if (editState.type === 'mobile' && !finalValue.startsWith('+967')) {
+        finalValue = `+967${finalValue}`;
+      }
+      const payload = editState.type === 'email' ? { email: finalValue } : { mobile: finalValue };
       const res = await userService.updateProfile(payload);
       console.log('Update Success Response:', res);
       

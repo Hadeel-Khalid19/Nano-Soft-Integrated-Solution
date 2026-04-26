@@ -31,7 +31,8 @@ const RegisterPage = ({ onNavigate }) => {
       // نرسل الداتا أولاً للـ validator
       await authService.registerValidator(formData);
       // إذا نجح الـ validator نقوم بإنشاء الحساب
-      await authService.register(formData);
+      const submitData = { ...formData, mobile: `+967${formData.mobile}` };
+      const data = await authService.register(submitData);
 
       alert('تم إنشاء الحساب بنجاح! انتقل لتفعيل حسابك');
       onNavigate('verify');

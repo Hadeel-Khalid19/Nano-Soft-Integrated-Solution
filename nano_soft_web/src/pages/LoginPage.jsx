@@ -16,8 +16,8 @@ const LoginPage = ({ onNavigate }) => {
 
     try {
       // إذا كان مختار هاتف، ممكن نضيف مفتاح الدولة إذا كان الـ API يطلبه، لكن حالياً نرسله كما هو أو حسب متطلباتك
-      // let finalIdentifier = loginMethod === 'phone' ? `+967${identifier}` : identifier;
-      const data = await authService.login(identifier, password);
+      let finalIdentifier = loginMethod === 'phone' ? `+967${identifier}` : identifier;
+      const data = await authService.login(finalIdentifier, password);
       alert('تم تسجيل الدخول بنجاح!');
       onNavigate('home');
     } catch (err) {
