@@ -76,7 +76,11 @@ const LoginPage = ({ onNavigate }) => {
           {loginMethod === 'phone' ? (
             <div className="phone-input-container">
               <div className="country-code-prefix">
-                <img src="https://flagcdn.com/w20/ye.png" alt="Yemen" style={{ width: '24px', height: 'auto', borderRadius: '2px' }} />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="24" height="16" style={{ borderRadius: '2px' }}>
+                  <rect width="900" height="600" fill="#000"/>
+                  <rect width="900" height="400" fill="#fff"/>
+                  <rect width="900" height="200" fill="#ce1126"/>
+                </svg>
                 <span style={{ direction: 'ltr' }}>+967</span>
               </div>
               <input 

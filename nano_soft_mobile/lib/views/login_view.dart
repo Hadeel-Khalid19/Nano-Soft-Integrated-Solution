@@ -186,7 +186,7 @@ class _LoginViewState extends State<LoginView> {
           decoration: const BoxDecoration(
             border: Border(left: BorderSide(color: Color(0xFFE2E8F0))),
           ),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.network('https://flagcdn.com/w40/ye.png', width: 24, errorBuilder: (context, error, stackTrace) => const Text('YE', style: TextStyle(fontWeight: FontWeight.bold))),
