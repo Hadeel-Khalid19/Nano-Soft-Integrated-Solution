@@ -81,15 +81,20 @@ const LoginPage = ({ onNavigate }) => {
                   <rect width="900" height="400" fill="#fff"/>
                   <rect width="900" height="200" fill="#ce1126"/>
                 </svg>
-                <span style={{ direction: 'ltr' }}>+967</span>
+                {/* السهم الصغير لمحاكاة القائمة المنسدلة كما في الصورة */}
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '2px' }}><polyline points="6 9 12 15 18 9"></polyline></svg>
               </div>
-              <input 
-                type="tel" 
-                placeholder="أدخل رقم الجوال" 
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                required
-              />
+              <div className="input-with-code">
+                <span className="dial-code">+967</span>
+                <input 
+                  type="tel" 
+                  placeholder="أدخل رقم الجوال" 
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  required
+                  style={{ paddingRight: '16px' }}
+                />
+              </div>
             </div>
           ) : (
             <div className="input-wrapper">

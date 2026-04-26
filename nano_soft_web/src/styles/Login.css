@@ -219,25 +219,38 @@ body {
 .country-code-prefix {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 16px;
+  gap: 4px;
+  padding: 14px;
   background: #f8fafc;
-  border-right: 1px solid #e2e8f0; /* Border on the right since it's on the left now */
-  font-weight: 700;
-  color: var(--text-navy);
+  border-right: 1px solid #e2e8f0; 
 }
 
-.phone-input-container input {
+.input-with-code {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background: transparent;
+  direction: ltr;
+}
+
+.dial-code {
+  padding-left: 12px;
+  color: var(--text-navy);
+  font-size: 1rem;
+}
+
+.input-with-code input {
   border: none;
-  padding: 14px 16px;
+  padding: 14px 16px 14px 6px;
   flex: 1;
   border-radius: 0;
   outline: none;
   background: transparent;
   direction: ltr;
-  text-align: left; /* Text aligns to the left to be right next to the +967 prefix */
+  text-align: left;
+  font-size: 1rem;
 }
 
-.phone-input-container input:focus {
+.input-with-code input:focus {
   box-shadow: none;
 }
