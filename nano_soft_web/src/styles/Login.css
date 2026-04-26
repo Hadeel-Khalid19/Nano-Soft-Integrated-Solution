@@ -235,7 +235,7 @@ body {
   outline: none;
   background: transparent;
   direction: ltr;
-  text-align: right; /* Text aligns to the right */
+  text-align: left; /* Text aligns to the left to be right next to the +967 prefix */
 }
 
 .phone-input-container input:focus {

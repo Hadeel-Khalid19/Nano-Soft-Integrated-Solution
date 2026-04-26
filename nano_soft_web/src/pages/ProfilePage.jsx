@@ -68,17 +68,22 @@ const ProfilePage = ({ onNavigate }) => {
           <div style={{ background: '#1E3A8A', color: '#fff', padding: '5px 10px', borderRadius: '5px', fontWeight: 'bold' }}>N</div>
           <span style={{ fontWeight: 'bold', color: '#1E3A8A' }}>نانو سوفت</span>
         </div>
-        <button onClick={handleLogout} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', padding: '5px 15px', borderRadius: '5px', cursor: 'pointer' }}>خروج</button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={() => onNavigate('home')} style={{ background: '#f1f5f9', color: '#1E3A8A', border: 'none', padding: '5px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>العودة للسابق</button>
+          <button onClick={handleLogout} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', padding: '5px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>خروج</button>
+        </div>
       </nav>
 
       <div style={{ maxWidth: '600px', margin: '20px auto', padding: '0 20px' }}>
         {/* User Card */}
-        <div style={{ background: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.02)', marginBottom: '20px' }}>
-          <div style={{ width: '80px', height: '80px', background: '#1E3A8A', borderRadius: '50%', margin: '0 auto 15px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff', fontSize: '30px' }}>
+        <div style={{ background: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.02)', marginBottom: '20px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '60px', background: 'linear-gradient(135deg, #1E3A8A, #111827)' }}></div>
+          <div style={{ width: '80px', height: '80px', background: '#d4af37', borderRadius: '50%', margin: '0 auto 15px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff', fontSize: '30px', position: 'relative', zIndex: 1, border: '4px solid #fff' }}>
             {user?.name?.charAt(0) || 'U'}
           </div>
-          <h2 style={{ margin: 0 }}>{user?.name || 'مستخدم نانو'}</h2>
-          <span style={{ fontSize: '0.8rem', color: '#64748b', background: '#f1f5f9', padding: '2px 10px', borderRadius: '10px' }}>عضو نشط</span>
+          <h2 style={{ margin: '0 0 5px 0', color: '#1E3A8A' }}>Welcome! أهلاً بك</h2>
+          <h3 style={{ margin: '0 0 15px 0', fontSize: '1.2rem', color: '#333' }}>{user?.name || 'مستخدم نانو'}</h3>
+          <span style={{ fontSize: '0.8rem', color: '#64748b', background: '#f1f5f9', padding: '4px 12px', borderRadius: '12px', fontWeight: 'bold' }}>عضو نشط</span>
         </div>
 
         {/* Info Card */}
