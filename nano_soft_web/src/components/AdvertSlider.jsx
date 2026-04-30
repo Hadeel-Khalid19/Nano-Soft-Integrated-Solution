@@ -37,21 +37,21 @@ const AdvertSlider = () => {
   const getPlaceholderAdverts = () => [
     {
       id: 1,
-      image_path: '/images/banner1.png',
-      title: 'مستقبل التعليم الذكي',
-      description: 'نظام نانو سوفت المتكامل يقدم تجربة رقمية فريدة تليق بمدرستكم الحديثة'
+      image_path: 'images/luxury_banner.png',
+      title: 'نظام نانو المتكامل',
+      description: 'الفخامة والاحترافية في إدارة المؤسسات التعليمية الحديثة'
     },
     {
       id: 2,
-      image_path: '/images/banner2.png',
-      title: 'إدارة تعليمية باحترافية',
-      description: 'نحول البيانات إلى قرارات ذكية تدعم تميز مدرستكم ونجاح طلابكم'
+      is_gradient: true,
+      title: 'تميز بمدرستك',
+      description: 'حلول رقمية مبتكرة تجمع بين دقة الأداء وجمال التصميم'
     },
     {
       id: 3,
-      image_path: '/images/banner3.png',
-      title: 'تواصل مجتمعي متقدم',
-      description: 'نسد الفجوة بين المدرسة والمنزل بأدوات تواصل عصرية وفعالة'
+      image_path: 'images/banner2.png',
+      title: 'مستقبل رقمي واعد',
+      description: 'انضم إلى نخبة المدارس التي اختارت نانو سوفت لتطوير رحلتها التعليمية'
     }
   ];
 
@@ -82,11 +82,18 @@ const AdvertSlider = () => {
         {adverts.map((advert, index) => (
           <SwiperSlide key={advert.id || index}>
             <div className="slide-image-wrapper">
-              <img 
-                src={advert.image_path || advert.image} 
-                alt={advert.title} 
-                className="slide-image"
-              />
+              {advert.is_gradient ? (
+                <div className="luxury-mesh-bg">
+                  <div className="mesh-circle mesh-1"></div>
+                  <div className="mesh-circle mesh-2"></div>
+                </div>
+              ) : (
+                <img 
+                  src={advert.image_path || advert.image} 
+                  alt={advert.title} 
+                  className="slide-image"
+                />
+              )}
               <div className="slide-overlay"></div>
             </div>
             
