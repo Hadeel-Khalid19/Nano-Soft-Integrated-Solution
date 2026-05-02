@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/Home.css';
 
+import AdvertSlider from '../components/AdvertSlider';
+
 const HomePage = ({ onNavigate }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -15,7 +17,7 @@ const HomePage = ({ onNavigate }) => {
       {/* Background Waves */}
       <div className="wave-bg top-wave">
         <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-          <path fill="rgba(30, 58, 138, 0.05)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+          <path fill="rgba(55, 59, 86, 0.05)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
         </svg>
       </div>
 
@@ -39,15 +41,14 @@ const HomePage = ({ onNavigate }) => {
 
       {/* Main Empty Content Area */}
       <main className="home-content">
-        <h1 style={{ fontSize: '3rem', color: 'var(--navy-blue)', zIndex: 20, textAlign: 'center', textShadow: '0 4px 15px rgba(212, 175, 55, 0.3)' }}>
-          Welcome
-        </h1>
+        <AdvertSlider />
       </main>
+
 
       {/* Bottom Wave */}
       <div className="wave-bg bottom-wave">
         <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-          <path fill="rgba(212, 175, 55, 0.05)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,240C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          <path fill="rgba(241, 183, 109, 0.05)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,240C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
       </div>
 

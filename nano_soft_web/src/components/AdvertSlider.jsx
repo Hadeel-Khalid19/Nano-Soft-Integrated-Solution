@@ -37,19 +37,22 @@ const AdvertSlider = () => {
   const getPlaceholderAdverts = () => [
     {
       id: 1,
-      image_path: 'images/luxury_banner.png',
+      is_gradient: true,
+      gradient_type: 'navy-gold',
       title: 'نظام نانو المتكامل',
       description: 'الفخامة والاحترافية في إدارة المؤسسات التعليمية الحديثة'
     },
     {
       id: 2,
       is_gradient: true,
+      gradient_type: 'gold-mesh',
       title: 'تميز بمدرستك',
       description: 'حلول رقمية مبتكرة تجمع بين دقة الأداء وجمال التصميم'
     },
     {
       id: 3,
-      image_path: 'images/banner2.png',
+      is_gradient: true,
+      gradient_type: 'deep-navy',
       title: 'مستقبل رقمي واعد',
       description: 'انضم إلى نخبة المدارس التي اختارت نانو سوفت لتطوير رحلتها التعليمية'
     }
@@ -58,7 +61,7 @@ const AdvertSlider = () => {
   if (loading) {
     return (
       <div className="advert-slider-container loading-skeleton">
-        <div className="skeleton-pulse" style={{ width: '100%', height: '100%', background: '#f0f0f0' }}></div>
+        <div className="skeleton-pulse" style={{ width: '100%', height: '100%', background: 'var(--color-delft-blue)' }}></div>
       </div>
     );
   }
@@ -81,19 +84,12 @@ const AdvertSlider = () => {
       >
         {adverts.map((advert, index) => (
           <SwiperSlide key={advert.id || index}>
-            <div className="slide-image-wrapper">
-              {advert.is_gradient ? (
-                <div className="luxury-mesh-bg">
-                  <div className="mesh-circle mesh-1"></div>
-                  <div className="mesh-circle mesh-2"></div>
-                </div>
-              ) : (
-                <img 
-                  src={advert.image_path || advert.image} 
-                  alt={advert.title} 
-                  className="slide-image"
-                />
-              )}
+            <div className={`slide-image-wrapper bg-type-${advert.gradient_type || 'navy-gold'}`}>
+              <div className="luxury-mesh-bg">
+                <div className="mesh-circle mesh-1"></div>
+                <div className="mesh-circle mesh-2"></div>
+                <div className="mesh-circle mesh-3"></div>
+              </div>
               <div className="slide-overlay"></div>
             </div>
             
@@ -104,12 +100,7 @@ const AdvertSlider = () => {
                     <motion.h2
                       initial={{ x: 50, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      transition={{ 
-                        type: "spring", 
-                        stiffness: 100, 
-                        damping: 20,
-                        delay: 0.2 
-                      }}
+                      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
                       className="slide-title"
                     >
                       {advert.title}
@@ -117,12 +108,7 @@ const AdvertSlider = () => {
                     <motion.p
                       initial={{ x: 30, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      transition={{ 
-                        type: "spring", 
-                        stiffness: 100, 
-                        damping: 20,
-                        delay: 0.4 
-                      }}
+                      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
                       className="slide-description"
                     >
                       {advert.description}

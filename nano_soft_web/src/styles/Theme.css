@@ -1,0 +1,44 @@
+:root {
+  /* Global Theme Colors - Luxury Palette */
+  --color-earth-yellow: #F1B76D;
+  --color-delft-blue: #373B56;
+  --color-delft-blue-dark: #1a1c29;
+  --color-delft-blue-light: #4a4f73;
+  
+  /* Luxury Gradients */
+  --grad-navy: linear-gradient(135deg, var(--color-delft-blue-dark) 0%, var(--color-delft-blue) 100%);
+  --grad-gold: linear-gradient(135deg, #fff7ed 0%, var(--color-earth-yellow) 100%);
+  --grad-premium: radial-gradient(circle at 20% 20%, rgba(241, 183, 109, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(55, 59, 86, 0.3) 0%, transparent 50%);
+  
+  /* Backgrounds */
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #ffffff;
+  --bg-dark: var(--color-delft-blue-dark);
+  
+  /* Text */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #ffffff;
+  --text-yellow: var(--color-earth-yellow);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Cairo', 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+.bg-premium-navy { background: var(--grad-navy); }
+.text-premium-gold {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
